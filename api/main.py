@@ -17,9 +17,9 @@ def get_all_tasks(db: Session = Depends(get_db)):
     tasks = db.execute(stmt).scalars().all()
     return tasks
 
-@router.post(path="tasks")
+@router.post(path="/tasks")
 def create_task(task: TaskCreate, db: Session = Depends(get_db)):
-    stmt = insert(Task).values(**task.model_dump()).on_conflict_do_nothing().returning(Task.id)
+    stmt = insert(Task).values(**task.model_dump()).returning(Task.id)
     try:
         result = db.execute(stmt)
         db.commit()

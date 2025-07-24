@@ -1,9 +1,10 @@
-from enum import Enum
+from enum import Enum as PyEnum
 from sqlalchemy import Column, Integer, String, Text, DateTime
+from sqlalchemy import Enum as SQLEnum
 from api.db import Base
 from datetime import datetime
 
-class TaskStatus(str, Enum):
+class TaskStatus(str, PyEnum):
     pending = "pending"
     in_progress = "in_progress"
     done = "done"
@@ -13,5 +14,5 @@ class Task(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String(100), nullable=False)
     description = Column(Text, nullable=True)
-    status = Column(Enum(TaskStatus), default=TaskStatus.pending, nullable=False)
+    status = Column(SQLEnum(TaskStatus), default=TaskStatus.pending, nullable=False)
     created_at = Column(DateTime, default=datetime.now)

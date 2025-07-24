@@ -1,3 +1,7 @@
 SQLAlchemy
 pydantic
 fastapi
+celery
+redis
+uvicorn
+psycopg2
