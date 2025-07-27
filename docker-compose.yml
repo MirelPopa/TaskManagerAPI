@@ -40,3 +40,17 @@ services:
     depends_on:
       - redis
       - postgres
+
+  flower:
+    image: mher/flower
+    command: celery -A worker.main:app flower --port=5555
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+      - worker
+
+

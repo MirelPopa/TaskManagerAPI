@@ -5,9 +5,10 @@ from sqlalchemy import insert, select
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
-from api.db import create_database_schema, get_db
+from api.db import get_db
 from api.models import Task
 from api.schema import TaskBase, TaskCreate, TaskRead, TaskStatus
+from worker.main import generate_report
 
 router = FastAPI()
 
@@ -36,3 +37,9 @@ def create_task(task: TaskCreate, db: Session = Depends(get_db)):
     except SQLAlchemyError as e:
         db.rollback()
         return {"status": "Failed", "reason": str(e)}
+
+
+@router.post("/tasks/{task_id}/generate-report")
+def generate_report_endpoint(task_id: int):
+    result = generate_report.delay(task_id)
+    return {"task_id": task_id, "celery_id": result.id}
