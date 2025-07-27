@@ -1,6 +1,7 @@
-from celery import Celery
-import time
 import os
+import time
+
+from celery import Celery
 
 redis_url = os.getenv("REDIS_URL", "redis://localhost:6379/0")
 app = Celery("worker", broker=redis_url)

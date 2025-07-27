@@ -1,8 +1,11 @@
-from enum import Enum as PyEnum
-from sqlalchemy import Column, Integer, String, Text, DateTime
-from sqlalchemy import Enum as SQLEnum
-from api.db import Base
 from datetime import datetime
+from enum import Enum as PyEnum
+
+from sqlalchemy import Column, DateTime
+from sqlalchemy import Enum as SQLEnum
+from sqlalchemy import Integer, String, Text
+
+from api.db import Base
 
 
 class TaskStatus(str, PyEnum):

@@ -1,12 +1,13 @@
-from fastapi import FastAPI, Depends
-from sqlalchemy.exc import SQLAlchemyError
-from api.db import create_database_schema
-from sqlalchemy import select, insert
-from sqlalchemy.orm import Session
-from api.db import get_db
-from api.models import Task
-from api.schema import TaskStatus, TaskBase, TaskRead, TaskCreate
 from typing import List
+
+from fastapi import Depends, FastAPI
+from sqlalchemy import insert, select
+from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy.orm import Session
+
+from api.db import create_database_schema, get_db
+from api.models import Task
+from api.schema import TaskBase, TaskCreate, TaskRead, TaskStatus
 
 router = FastAPI()
 create_database_schema()
