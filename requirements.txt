@@ -4,6 +4,6 @@ fastapi
 celery
 redis
 uvicorn
-psycopg2
+psycopg2-binary
 pytest
 python-dotenv
