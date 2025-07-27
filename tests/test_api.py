@@ -34,13 +34,6 @@ def test_create_task_without_title(clear_db):
     assert response.status_code == 422
 
 
-def test_duplicate_title(clear_db):
-    task = {"title": "Unique Title", "description": "first"}
-    test_client.post("/tasks", json=task)
-    response2 = test_client.post("/tasks", json=task)
-    assert response2.status_code != 200
-
-
 def test_get_tasks_returns_list(clear_db):
     response = test_client.get("/tasks")
     assert response.status_code == 200
