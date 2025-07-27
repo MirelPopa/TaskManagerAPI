@@ -1,11 +1,16 @@
-from fastapi.testclient import TestClient
+import os
 
-from api.db import SessionLocal
+from fastapi.testclient import TestClient
+from sqlalchemy.orm import Session
+
+from api.db import get_session_local
 from api.main import get_db, router
+
+TestSessionLocal = get_session_local(os.getenv("TEST_DATABASE_URL"))
 
 
 def override_get_db():
-    db = SessionLocal()
+    db: Session = TestSessionLocal()
     try:
         yield db
     finally:
@@ -13,7 +18,6 @@ def override_get_db():
 
 
 router.dependency_overrides[get_db] = override_get_db
-
 test_client = TestClient(router)
 
 

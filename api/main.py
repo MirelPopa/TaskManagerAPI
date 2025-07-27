@@ -10,7 +10,6 @@ from api.models import Task
 from api.schema import TaskBase, TaskCreate, TaskRead, TaskStatus
 
 router = FastAPI()
-create_database_schema()
 
 
 @router.get(path="/tasks", response_model=List[TaskRead])

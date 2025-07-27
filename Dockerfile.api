@@ -6,4 +6,4 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY ./api ./api
-CMD ["uvicorn", "api.main:router", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+CMD ["sh", "-c", "python scripts/init_db.py && uvicorn api.main:router --host 0.0.0.0 --port 8000"]
