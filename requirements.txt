@@ -7,3 +7,4 @@ uvicorn
 psycopg2-binary
 pytest
 python-dotenv
+prometheus-client
