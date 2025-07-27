@@ -1,7 +1,9 @@
 from celery import Celery
 import time
+import os
 
-app = Celery("worker", broker="redis://redis:6379/0")
+redis_url = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+app = Celery("worker", broker=redis_url)
 
 @app.task
 def process_task(task_id: int):
