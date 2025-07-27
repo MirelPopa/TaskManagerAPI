@@ -6,3 +6,4 @@ redis
 uvicorn
 psycopg2
 pytest
+python-dotenv
