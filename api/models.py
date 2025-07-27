@@ -4,10 +4,12 @@ from sqlalchemy import Enum as SQLEnum
 from api.db import Base
 from datetime import datetime
 
+
 class TaskStatus(str, PyEnum):
     pending = "pending"
     in_progress = "in_progress"
     done = "done"
+
 
 class Task(Base):
     __tablename__ = "tasks"

@@ -11,11 +11,13 @@ from typing import List
 router = FastAPI()
 create_database_schema()
 
+
 @router.get(path="/tasks", response_model=List[TaskRead])
 def get_all_tasks(db: Session = Depends(get_db)):
     stmt = select(Task)
     tasks = db.execute(stmt).scalars().all()
     return tasks
+
 
 @router.post(path="/tasks")
 def create_task(task: TaskCreate, db: Session = Depends(get_db)):
@@ -29,7 +31,7 @@ def create_task(task: TaskCreate, db: Session = Depends(get_db)):
         else:
             return {
                 "status": "Failed",
-                "reason": "Task already exists or violates constraints"
+                "reason": "Task already exists or violates constraints",
             }
     except SQLAlchemyError as e:
         db.rollback()
