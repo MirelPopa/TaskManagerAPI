@@ -31,5 +31,8 @@ jobs:
       - name: Run import sorter (isort)
         run: isort . --check-only
 
+      - name: Run tests
+        run: pytest
+
       - name: Build Docker image
         run: docker build -t fastapi-app -f Dockerfile.api .
